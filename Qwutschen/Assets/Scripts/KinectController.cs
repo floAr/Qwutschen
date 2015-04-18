@@ -48,6 +48,11 @@ public class KinectController : MonoBehaviour
         { Kinect.JointType.Neck, Kinect.JointType.Head },
     };
 
+    void Start()
+    {
+       
+    }
+
     void Update()
     {
         if (BodySourceManager == null)

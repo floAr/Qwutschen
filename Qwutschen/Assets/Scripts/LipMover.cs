@@ -11,10 +11,11 @@ public class LipMover : MonoBehaviour
 
     private float _currentDistance;
 
+    private Transform _transform;
     // Use this for initialization
     void Start()
     {
-
+        _transform = this.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class LipMover : MonoBehaviour
         _currentDistance += (TargetDistance - _currentDistance) * Speed * Time.deltaTime;
         var alpha = Mathf.Asin(_currentDistance * 0.8939966636f / Length) * 57.2957795 / Dampening;
         if (!(double.IsNaN(alpha)))
-            this.GetComponent<Transform>().localRotation = Quaternion.Euler(0, 0, (float)alpha);
+            _transform.localRotation = Quaternion.Euler(0, 0, (float)alpha);
 
 
     }
