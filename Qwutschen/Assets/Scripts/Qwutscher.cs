@@ -9,16 +9,19 @@ public class Qwutscher : MonoBehaviour
     public bool IsTracked;
     public Windows.Kinect.Body Body;
 
-    public Vector2 LeftHandPosition;
-    public Vector2 LeftElbowPosition;
-
-    public Vector2 RightHandPosition;
-    public Vector2 RightElbowPosition;
+    private Vector2 LeftHandPosition;
+    private Vector2 LeftElbowPosition;
+    private Vector2 RightHandPosition;
+    private Vector2 RightElbowPosition;
+    private Vector2 LeftShoulderPosition;
+    private Vector2 RightShoulderPosition;
+    private Vector2 HeadPosition;
 
     public float LeftFrontOffset;
     public float RightFrontOffset;
 
-    public Vector2 HeadPosition;
+    public float LeftBackOffset;
+    public float RightBackOffset;
 
     public Vector2 AnchorPosition;
 
@@ -27,7 +30,13 @@ public class Qwutscher : MonoBehaviour
     public List<GameObject> _tracker;
 
     public GameObject Avatar;
-    public GameObject LowerLip;
+
+    public LipMover UpperFrontLip;
+    public LipMover UpperBackLip;
+    public LipMover LowerFrontLip;
+    public LipMover LowerBackLip;
+
+    public bool KinectInput;
 
     // Use this for initialization
     void Start()
@@ -36,28 +45,44 @@ public class Qwutscher : MonoBehaviour
         {
             _tracker.Add(GameObject.Instantiate(Tracker));
         }
-    }
+            }
 
     // Update is called once per frame
     void Update()
     {
-        if (Body != null)
+        if (KinectInput)
         {
-            LeftHandPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.HandLeft]);
-            LeftElbowPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ElbowLeft]);
-            RightHandPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.HandRight]);
-            RightElbowPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ElbowRight]);
-            HeadPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.Head]);
-            AnchorPosition = (GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderRight]) + GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderLeft])) / 2;
+            if (Body != null)
+            {
+                LeftHandPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.HandLeft]);
+                LeftElbowPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ElbowLeft]);
+                RightHandPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.HandRight]);
+                RightElbowPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ElbowRight]);
+                HeadPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.Head]);
+                LeftShoulderPosition= GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderLeft]);
+                RightShoulderPosition= GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderRight]);
+                AnchorPosition = (RightShoulderPosition +LeftShoulderPosition) / 2;
 
-            LeftFrontOffset = LeftHandPosition.y - LeftElbowPosition.y;
-            RightFrontOffset = RightHandPosition.y - RightElbowPosition.y;
+                LeftFrontOffset = LeftHandPosition.y - AnchorPosition.y;
+                RightFrontOffset = RightHandPosition.y - AnchorPosition.y;
+                LeftBackOffset = LeftElbowPosition.y - AnchorPosition.y;
+                RightBackOffset = RightElbowPosition.y - AnchorPosition.y;
 
-            Avatar.GetComponent<Transform>().position = AnchorPosition;
-            LowerLip.GetComponent<SpringJoint2D>().connectedAnchor = RightHandPosition;
-
-            setTracker();
+            }
         }
+        else
+        {
+            LeftFrontOffset = Input.GetAxis("LeftFrontAxis") * 1.8f;
+            RightFrontOffset = Input.GetAxis("RightFrontAxis") * 1.8f;
+            LeftBackOffset = Input.GetAxis("LeftBackAxis") * 1.8f;
+            RightBackOffset = Input.GetAxis("RightBackAxis") * 1.8f;
+        }
+
+
+        Avatar.GetComponent<Transform>().position = AnchorPosition;
+
+        setTracker();
+        AnimateFace();
     }
 
     private void setTracker()
@@ -81,6 +106,10 @@ public class Qwutscher : MonoBehaviour
 
     public void AnimateFace()
     {
+        UpperBackLip.TargetDistance = LeftBackOffset;
+        UpperFrontLip.TargetDistance = LeftFrontOffset;
+        LowerBackLip.TargetDistance = RightBackOffset;
+        LowerFrontLip.TargetDistance = RightFrontOffset;
 
     }
 }
