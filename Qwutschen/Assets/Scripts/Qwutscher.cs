@@ -9,22 +9,30 @@ public class Qwutscher : MonoBehaviour
     public bool IsTracked;
     public Windows.Kinect.Body Body;
 
-    public Vector3 LeftHandPosition;
-    public Vector3 LeftElbowPosition;
+    public Vector2 LeftHandPosition;
+    public Vector2 LeftElbowPosition;
 
-    public Vector3 RightHandPosition;
-    public Vector3 RightElbowPosition;
+    public Vector2 RightHandPosition;
+    public Vector2 RightElbowPosition;
 
-    public Vector3 HeadPosition;
+    public float LeftFrontOffset;
+    public float RightFrontOffset;
+
+    public Vector2 HeadPosition;
+
+    public Vector2 AnchorPosition;
 
     public GameObject Tracker;
 
     public List<GameObject> _tracker;
 
+    public GameObject Avatar;
+    public GameObject LowerLip;
+
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             _tracker.Add(GameObject.Instantiate(Tracker));
         }
@@ -40,6 +48,13 @@ public class Qwutscher : MonoBehaviour
             RightHandPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.HandRight]);
             RightElbowPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ElbowRight]);
             HeadPosition = GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.Head]);
+            AnchorPosition = (GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderRight]) + GetVector3FromJoint(Body.Joints[Windows.Kinect.JointType.ShoulderLeft])) / 2;
+
+            LeftFrontOffset = LeftHandPosition.y - LeftElbowPosition.y;
+            RightFrontOffset = RightHandPosition.y - RightElbowPosition.y;
+
+            Avatar.GetComponent<Transform>().position = AnchorPosition;
+            LowerLip.GetComponent<SpringJoint2D>().connectedAnchor = RightHandPosition;
 
             setTracker();
         }
@@ -52,6 +67,7 @@ public class Qwutscher : MonoBehaviour
         _tracker[2].GetComponent<Transform>().position = RightHandPosition;
         _tracker[3].GetComponent<Transform>().position = RightElbowPosition;
         _tracker[4].GetComponent<Transform>().position = HeadPosition;
+        _tracker[5].GetComponent<Transform>().position = AnchorPosition;
     }
     public void LogLoss()
     {
@@ -60,6 +76,11 @@ public class Qwutscher : MonoBehaviour
 
     private static Vector3 GetVector3FromJoint(Windows.Kinect.Joint joint)
     {
-        return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);
+        return new Vector3(joint.Position.X * 6, joint.Position.Y * 6, 0);
+    }
+
+    public void AnimateFace()
+    {
+
     }
 }
