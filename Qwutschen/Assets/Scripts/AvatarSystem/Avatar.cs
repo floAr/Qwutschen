@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Avatar : MonoBehaviour {
+public class Avatar : MonoBehaviour
+{
 
     public Touchpoint Eye;
     public Touchpoint Ear;
     public Touchpoint Nose;
     public Touchpoint Hair;
     public Touchpoint Dress;
+
+
 
     public LipMover UpperFrontLip;
     public LipMover UpperBackLip;
@@ -16,15 +19,49 @@ public class Avatar : MonoBehaviour {
 
     private Qwutscher _qwutscher;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         _qwutscher = GetComponentInParent<Qwutscher>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        foreach (Transform t in transform)
+        {
+            if (t.name.ToLower() == "mouth")
+            {
+                var tp = t.GetComponentsInChildren<LipMover>();
+                foreach (var item in tp)
+                {
+                    if (item.name.ToLower().Contains("upper"))
+                    {
+                        if (item.name.ToLower().Contains("front"))
+                        {
+                            UpperFrontLip = item;
+                        }
+                        else
+                        {
+                            UpperBackLip = item;
+                        }
+                    }
+                    else
+                    {
+                        if (item.name.ToLower().Contains("front"))
+                        {
+                            LowerFrontLip = item;
+                        }
+                        else
+                        {
+                            LowerBackLip = item;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         AnimateFace();
-	}
+    }
 
     public void AnimateFace()
     {

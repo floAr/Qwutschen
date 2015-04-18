@@ -51,6 +51,9 @@ public class Qwutscher : MonoBehaviour
         _renderer = this.GetComponent<Renderer>();
         _lastTracked = !IsTracked;
 
+        Avatar = (Avatar)GameObject.Instantiate(Avatar, this.transform.position, Quaternion.identity);
+        Avatar.transform.parent = this.transform;
+
         foreach (var item in GetComponentsInChildren<Touchpoint>())   
         {
             item.Owner = Player;
