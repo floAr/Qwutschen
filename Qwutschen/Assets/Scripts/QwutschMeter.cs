@@ -16,7 +16,7 @@ public class QwutschMeter : MonoBehaviour {
 	if(CurrentQwutsch>=NextLevelQwutsch)
     {
         CurrentQwutsch -= NextLevelQwutsch;
-        NextLevelQwutsch = NextLevelQwutsch *= 2.6f;
+        NextLevelQwutsch = NextLevelQwutsch * 2.6f;
         CurrentLevel++;
     }
 	}

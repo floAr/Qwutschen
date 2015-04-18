@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Avatar : MonoBehaviour {
 
-    public FeatureSlot Eye;
-    public FeatureSlot Ear;
-    public FeatureSlot Nose;
-    public FeatureSlot Hair;
-    public FeatureSlot Dress;
+    public Touchpoint Eye;
+    public Touchpoint Ear;
+    public Touchpoint Nose;
+    public Touchpoint Hair;
+    public Touchpoint Dress;
 
     public LipMover UpperFrontLip;
     public LipMover UpperBackLip;

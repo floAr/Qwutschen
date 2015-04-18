@@ -31,7 +31,7 @@ public class Qwutscher : MonoBehaviour
 
     public Avatar Avatar;
 
-
+    public PlayerEnum Player;
 
     private bool _lastTracked;
 
@@ -50,6 +50,11 @@ public class Qwutscher : MonoBehaviour
         _transform = this.GetComponent<Transform>();
         _renderer = this.GetComponent<Renderer>();
         _lastTracked = !IsTracked;
+
+        foreach (var item in GetComponentsInChildren<Touchpoint>())   
+        {
+            item.Owner = Player;
+        }
     }
 
     // Update is called once per frame
