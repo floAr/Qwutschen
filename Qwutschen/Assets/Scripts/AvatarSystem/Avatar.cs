@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class Avatar:MonoBehaviour
 {
 
     public Touchpoint Eye;
