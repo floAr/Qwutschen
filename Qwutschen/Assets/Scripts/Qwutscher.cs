@@ -87,6 +87,19 @@ public class Qwutscher : MonoBehaviour
         }
     }
 
+    public void GetRandomAvatar()
+    {
+        if (_avatar != null)
+            GameObject.Destroy(_avatar);
+        var avatarPrefab = GameObject.FindObjectOfType<RandomAvatarSelector>().GetRandomAvatar();
+        _avatar = (Avatar)GameObject.Instantiate(avatarPrefab, this.transform.position, Quaternion.identity);
+        _avatar.transform.parent = this.transform;
+        foreach (var item in GetComponentsInChildren<Touchpoint>())
+        {
+            item.Owner = Player;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -112,6 +125,7 @@ public class Qwutscher : MonoBehaviour
                 RightFrontOffset = RightHandPosition.y - AnchorPosition.y;
                 LeftBackOffset = LeftElbowPosition.y - AnchorPosition.y;
                 RightBackOffset = RightElbowPosition.y - AnchorPosition.y;
+                _avatar.GetComponent<Transform>().position = AnchorPosition + _offset;
 
             }
         }
@@ -124,7 +138,7 @@ public class Qwutscher : MonoBehaviour
         }
 
 
-        _avatar.GetComponent<Transform>().position = AnchorPosition;
+        
 #if TRACKER
         setTracker();
 #endif

@@ -111,7 +111,8 @@ public class KinectController : MonoBehaviour
                     Player1.SendMessage("LogLoss");
                     Player1.Id = 0;
                     Player1.IsTracked = false;
-                    Player2.Body = null;
+                    Player1.Body = null;
+                    Player1.GetRandomAvatar();
                 }
                 else if (Player2.Id == trackingId)
                 {
@@ -119,6 +120,7 @@ public class KinectController : MonoBehaviour
                     Player2.Id = 0;
                     Player2.IsTracked = false;
                     Player2.Body = null;
+                    Player2.GetRandomAvatar();
                 }
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);

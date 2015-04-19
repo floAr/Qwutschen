@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Avatar:MonoBehaviour
 {
@@ -17,9 +18,14 @@ public class Avatar:MonoBehaviour
 
     private Qwutscher _qwutscher;
 
+    private float _nextGood, _nextBad;
+
 	// Use this for initialization
     void Start()
     {
+
+        _nextBad = 15;
+        _nextGood = 10;
         _qwutscher = GetComponentInParent<Qwutscher>();
         foreach (Transform t in transform)
         {
@@ -60,6 +66,50 @@ public class Avatar:MonoBehaviour
 	void Update () {
         if (_qwutscher != null)
             AnimateFace();
+        _nextGood-=Time.deltaTime;
+        _nextBad-=Time.deltaTime;
+        if(_nextGood<=0)
+        {
+            UIQwutscherLikesDislikes like = (UIQwutscherLikesDislikes)UnityEngine.Random.Range(0, Enum.GetValues(typeof(UIQwutscherLikesDislikes)).Length);
+            QwutscherBubbleBehaviour bubbles = GameObject.FindObjectOfType<QwutscherBubbleBehaviour>();
+            bubbles.PlayerLikes(like, _qwutscher.Player == PlayerEnum.Player1);
+            switch (like)
+            {
+                case UIQwutscherLikesDislikes.Nose:
+                    Nose.MakeGoodPoint();
+                    break;
+                case UIQwutscherLikesDislikes.Eye:
+                    Eye.MakeGoodPoint();
+                    break;
+                case UIQwutscherLikesDislikes.Ear:
+                    Ear.MakeGoodPoint();
+                    break;
+                default:
+                    break;
+            }
+            _nextGood = UnityEngine.Random.Range(5, 15);
+        }
+        if(_nextBad<=0)
+        {
+            UIQwutscherLikesDislikes dislike = (UIQwutscherLikesDislikes)UnityEngine.Random.Range(0, Enum.GetValues(typeof(UIQwutscherLikesDislikes)).Length);
+            QwutscherBubbleBehaviour bubbles = GameObject.FindObjectOfType<QwutscherBubbleBehaviour>();
+            bubbles.PlayerDislikes(dislike, _qwutscher.Player == PlayerEnum.Player1);
+            switch (dislike)
+            {
+                case UIQwutscherLikesDislikes.Nose:
+                    Nose.MakeBadPoint();
+                    break;
+                case UIQwutscherLikesDislikes.Eye:
+                    Eye.MakeBadPoint();
+                    break;
+                case UIQwutscherLikesDislikes.Ear:
+                    Ear.MakeBadPoint();
+                    break;
+                default:
+                    break;
+            }
+            _nextBad = UnityEngine.Random.Range(10, 15);
+        }
 	}
 
     public void AnimateFace()

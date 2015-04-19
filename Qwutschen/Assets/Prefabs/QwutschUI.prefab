@@ -467,11 +467,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b713dd1c381f0842a46a6301eba4e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LikeNothing: {fileID: 0}
-  DislikeNothing: {fileID: 0}
-  Nose: {fileID: 0}
-  Eye: {fileID: 0}
-  Ear: {fileID: 0}
+  LikeNothing: {fileID: 21300000, guid: b06cd5a4ffaba444a86dd907949a90b2, type: 3}
+  DislikeNothing: {fileID: 21300000, guid: dc6156182b17c3f448544a34ac768d82, type: 3}
+  Nose: {fileID: 21300000, guid: 65f131dbe29d0c347a62715301498bcc, type: 3}
+  Eye: {fileID: 21300000, guid: ce87ae69c9a18904387e4431c08832b4, type: 3}
+  Ear: {fileID: 21300000, guid: 26cce6a4948c8fd4b88ffa6c9daaf025, type: 3}
   P1Like: {fileID: 21208340}
   P1Dislike: {fileID: 21249080}
   P2Like: {fileID: 21262388}

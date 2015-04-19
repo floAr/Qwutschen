@@ -42,14 +42,20 @@ public class Touchpoint : MonoBehaviour
         }
         if (Charged != 0)
         {
+            Debug.Log(Charged+":"+ChargeToPop);
             if (ChargeToPop <= 0)
             {
                 Charged = 0;
+                QwutscherBubbleBehaviour bubbles = GameObject.FindObjectOfType<QwutscherBubbleBehaviour>();
+                           
                 if (Charged == -1)
                 {
                     _qMeter.ChangeQwutschPoints(50);
                     _qMeter.ChangeQwutschEnergy(10);
+                    bubbles.PlayerDislikes(UIQwutscherLikesDislikes.Nothing, Owner == PlayerEnum.Player1);
                 }
+                else
+                    bubbles.PlayerLikes(UIQwutscherLikesDislikes.Nothing, Owner == PlayerEnum.Player1);
             }
             if (Charged == -1)
                 ChargeToPop -= Time.deltaTime;
@@ -60,28 +66,34 @@ public class Touchpoint : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         var tp = coll.gameObject.GetComponent<Touchpoint>();
-        if (tp.Owner != this.Owner && Active)
+        if (tp == null)
+            return;
+        if (Active)
+        {
+            if (tp.Owner != this.Owner)
 
-            if (coll.gameObject.GetComponent<Touchpoint>().Owner != this.Owner && Active)
-            {
-                if (tp.Charged == -1)
+                if (coll.gameObject.GetComponent<Touchpoint>().Owner != this.Owner && Active)
                 {
-                    _qMeter.ChangeQwutschEnergy(-1 * Time.deltaTime);
-                    _qMeter.ChangeQwutschPoints(-Energy);
+                    if (tp.Charged == -1)
+                    {
+                        _qMeter.ChangeQwutschEnergy(-1 * Time.deltaTime);
+                        _qMeter.ChangeQwutschPoints(-Energy);
+                    }
+                    else
+                    {
+                        _qMeter.ChangeQwutschPoints(Energy);
+                        Debug.Log("Points" + Energy);
+                        if (tp.ChargeToPop > 0)
+                            tp.ChargeToPop -= Energy;
+                    }
                 }
-                else
-                {
-                    _qMeter.ChangeQwutschPoints(Energy);
-                    if (ChargeToPop > 0)
-                        ChargeToPop -= Energy;
-                }
-            }
+        }
     }
 
     public void MakeGoodPoint()
     {
         Charged = 1;
-        ChargeToPop = 5;
+        ChargeToPop = 50;
     }
 
     public void MakeBadPoint()

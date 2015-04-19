@@ -9,7 +9,7 @@ public enum UIQwutscherLikesDislikes
 	Ear
 }
 
-public class QwutscherBubbleBehaivour : MonoBehaviour {
+public class QwutscherBubbleBehaviour : MonoBehaviour {
 
 	public Sprite LikeNothing;
 	public Sprite DislikeNothing;
