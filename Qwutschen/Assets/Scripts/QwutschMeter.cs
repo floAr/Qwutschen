@@ -49,12 +49,17 @@ public class QwutschMeter : MonoBehaviour {
 
 	private bool testOvercharge()
 	{
+		var currStat = IsOvercharge;
 		IsOvercharge = CollisionPlane.localPosition.y > QwutschBarCollYPosMax * QwutschOverchargeCollYPosPercentage;
 		if (Spark != null) {
 			if (IsOvercharge)
 				Spark.enableEmission = true;//.gameObject.SetActive (true);
 			else
 				Spark.enableEmission = false;//.gameObject.SetActive (false);
+		}
+
+		if (currStat != IsOvercharge) {
+
 		}
 		return IsOvercharge;
 	}
