@@ -59,14 +59,20 @@ public class QwutschMeter : MonoBehaviour {
 				Spark.enableEmission = false;//.gameObject.SetActive (false);
 		}
 
-		if (currStat != IsOvercharge) {
-
+		if (currStat != IsOvercharge && IsOvercharge) {
+			PlayOverchargeSound();
 		}
 		return IsOvercharge;
 	}
 
-    public void ChangeQwutschPoints(float amount)
-    {
+	void PlayOverchargeSound()
+	{
+		var sound = GetComponent<AudioSource> ();
+		if(sound != null) sound.Play ();
+	}
+	
+	public void ChangeQwutschPoints(float amount)
+	{
 		if (testOvercharge ())
 			amount = (amount * QwutschOverchargeBonusMultiplicator);
 		CurrentQwutschPoints += amount;
