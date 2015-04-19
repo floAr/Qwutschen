@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class QwutschMeter : MonoBehaviour {
@@ -19,7 +18,7 @@ public class QwutschMeter : MonoBehaviour {
 	public float QwutschTime = 60f;
 	public float yPosCollPlane;
 	public float TimeElapsed;
-	public Text PointsText;
+	public TextBehaviour PointsText;
 
 	private ParticleSystem _qwutschBar;
 	public ParticleSystem Spark;
@@ -43,8 +42,10 @@ public class QwutschMeter : MonoBehaviour {
 		CurrentQwutschEnergy = Mathf.Clamp (CurrentQwutschEnergy, 0f, 100f);
 		IsEmpty = CurrentQwutschEnergy <= 0f;
 
-		if(PointsText != null)
-			PointsText.text = string.Format ("{0}", CurrentQwutschPoints.ToString("0000"));
+		if (PointsText != null) {
+			PointsText.UnwrappedText = string.Format ("{0}", CurrentQwutschPoints.ToString ("0"));
+			PointsText.DoLayout = true;
+		}
 	}
 
 	private bool testOvercharge()
