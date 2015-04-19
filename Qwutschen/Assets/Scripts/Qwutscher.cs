@@ -50,6 +50,7 @@ public class Qwutscher : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
 #if TRACKER
         for (int i = 0; i < 6; i++)
         {
