@@ -42,6 +42,7 @@ public class Touchpoint : MonoBehaviour
         }
         if (Charged != 0)
         {
+            Debug.Log(Charged+":"+ChargeToPop);
             if (ChargeToPop <= 0)
             {
                 Charged = 0;
@@ -82,8 +83,8 @@ public class Touchpoint : MonoBehaviour
                     {
                         _qMeter.ChangeQwutschPoints(Energy);
                         Debug.Log("Points" + Energy);
-                        if (ChargeToPop > 0)
-                            ChargeToPop -= Energy;
+                        if (tp.ChargeToPop > 0)
+                            tp.ChargeToPop -= Energy;
                     }
                 }
         }
@@ -92,7 +93,7 @@ public class Touchpoint : MonoBehaviour
     public void MakeGoodPoint()
     {
         Charged = 1;
-        ChargeToPop = 5;
+        ChargeToPop = 50;
     }
 
     public void MakeBadPoint()
