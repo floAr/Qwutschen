@@ -17,6 +17,8 @@ public class Touchpoint : MonoBehaviour
 
     private QwutschMeter _qMeter;
 
+	private GameObject Blblblblblbl;
+
     public PlayerEnum Owner;
 
 
@@ -30,6 +32,8 @@ public class Touchpoint : MonoBehaviour
         {
             item.enabled = false;
         }
+
+		Blblblblblbl = GameObject.Find ("Blblblblblbl");
     }
 
     void Update()
@@ -71,22 +75,27 @@ public class Touchpoint : MonoBehaviour
         if (Active)
         {
             if (tp.Owner != this.Owner)
-
-                if (coll.gameObject.GetComponent<Touchpoint>().Owner != this.Owner && Active)
+			{
+				if(Blblblblblbl != null)
+				{
+					if(Owner == PlayerEnum.Player1)
+						Blblblblblbl.GetComponent<BlScript>().P1.PlayQwutschSound(transform.position);
+					else
+						Blblblblblbl.GetComponent<BlScript>().P2.PlayQwutschSound(transform.position);
+				}
+                if (tp.Charged == -1)
                 {
-                    if (tp.Charged == -1)
-                    {
-                        _qMeter.ChangeQwutschEnergy(-1 * Time.deltaTime);
-                        _qMeter.ChangeQwutschPoints(-Energy);
-                    }
-                    else
-                    {
-                        _qMeter.ChangeQwutschPoints(Energy);
-                        Debug.Log("Points" + Energy);
-                        if (tp.ChargeToPop > 0)
-                            tp.ChargeToPop -= Energy;
-                    }
+                    _qMeter.ChangeQwutschEnergy(-1 * Time.deltaTime);
+                    _qMeter.ChangeQwutschPoints(-Energy);
                 }
+                else
+                {
+                    _qMeter.ChangeQwutschPoints(Energy);
+                    Debug.Log("Points" + Energy);
+                    if (tp.ChargeToPop > 0)
+                        tp.ChargeToPop -= Energy;
+                }
+            }
         }
     }
 
