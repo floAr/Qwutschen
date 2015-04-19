@@ -60,7 +60,8 @@ public class Avatar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AnimateFace();
+        if (_qwutscher != null)
+            AnimateFace();
     }
 
     public void AnimateFace()
