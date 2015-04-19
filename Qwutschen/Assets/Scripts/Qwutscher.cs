@@ -39,7 +39,6 @@ public class Qwutscher : MonoBehaviour
 
     private Transform _transform;
     private Renderer _renderer;
-    private Vector2 _offset;
 
     // Use this for initialization
     void Start()
@@ -52,18 +51,6 @@ public class Qwutscher : MonoBehaviour
         _renderer = this.GetComponent<Renderer>();
         _lastTracked = !IsTracked;
 
-        Avatar = (Avatar)GameObject.Instantiate(Avatar, this.transform.position, Quaternion.identity);
-        Avatar.transform.parent = this.transform;
-
-        if (Player == PlayerEnum.Player2)
-        {
-            Avatar.transform.localScale = new Vector3(Avatar.transform.localScale.x * -1, Avatar.transform.localScale.y, Avatar.transform.localScale.z);
-            _offset = Vector2.right * 2;
-        }
-        else
-        {
-            _offset = Vector2.right * -2;
-        }
         foreach (var item in GetComponentsInChildren<Touchpoint>())   
         {
             item.Owner = Player;
@@ -107,7 +94,7 @@ public class Qwutscher : MonoBehaviour
         }
 
 
-        Avatar.GetComponent<Transform>().position = AnchorPosition+_offset;
+        Avatar.GetComponent<Transform>().position = AnchorPosition;
 
         setTracker();
     }
