@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Avatar : MonoBehaviour {
+{
 
     public Touchpoint Eye;
     public Touchpoint Ear;
@@ -23,7 +23,8 @@ public class Avatar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        AnimateFace();
+        if (_qwutscher != null)
+            AnimateFace();
 	}
 
     public void AnimateFace()
