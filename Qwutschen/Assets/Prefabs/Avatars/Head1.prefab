@@ -28,6 +28,7 @@ GameObject:
   - 212: {fileID: 21264180}
   - 65: {fileID: 6586768}
   - 114: {fileID: 11400178}
+  - 54: {fileID: 5477714}
   m_Layer: 0
   m_Name: Ohr2
   m_TagString: Untagged
@@ -169,6 +170,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 423006}
   - 212: {fileID: 21278514}
+  - 114: {fileID: 11480862}
   m_Layer: 0
   m_Name: Head1
   m_TagString: Untagged
@@ -493,6 +495,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5477714
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122018}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &5486494
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -693,6 +710,26 @@ MonoBehaviour:
   ChargeToPop: 0
   Decay: .980000019
   Owner: 0
+--- !u!114 &11480862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce68075d59bb7e4c9c488e62d0084be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Eye: {fileID: 11480224}
+  Ear: {fileID: 11400178}
+  Nose: {fileID: 11420424}
+  Hair: {fileID: 0}
+  Dress: {fileID: 11477606}
+  UpperFrontLip: {fileID: 0}
+  UpperBackLip: {fileID: 0}
+  LowerFrontLip: {fileID: 0}
+  LowerBackLip: {fileID: 0}
 --- !u!114 &11487330
 MonoBehaviour:
   m_ObjectHideFlags: 1

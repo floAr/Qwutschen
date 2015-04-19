@@ -87,6 +87,19 @@ public class Qwutscher : MonoBehaviour
         }
     }
 
+    public void GetRandomAvatar()
+    {
+        if (_avatar != null)
+            GameObject.Destroy(_avatar);
+        var avatarPrefab = GameObject.FindObjectOfType<RandomAvatarSelector>().GetRandomAvatar();
+        _avatar = (Avatar)GameObject.Instantiate(avatarPrefab, this.transform.position, Quaternion.identity);
+        _avatar.transform.parent = this.transform;
+        foreach (var item in GetComponentsInChildren<Touchpoint>())
+        {
+            item.Owner = Player;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
