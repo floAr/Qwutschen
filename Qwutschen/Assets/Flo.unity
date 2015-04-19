@@ -130,7 +130,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &536160440
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,49 @@ Transform:
   m_LocalScale: {x: 5.28768253, y: 5.14748526, z: 4.11002064}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
+--- !u!1 &561151900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 561151902}
+  - 114: {fileID: 561151901}
+  m_Layer: 0
+  m_Name: AvatarGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &561151901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561151900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a033a7aed646d49b7beee754511661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Avatars:
+  - {fileID: 11435942, guid: 83be41bcdad80374887e40e65108b20b, type: 2}
+  - {fileID: 11439980, guid: 791d4a1592df3554f9cba1bdc3274b31, type: 2}
+--- !u!4 &561151902
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561151900}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.75, y: -1.10000002, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &739862768
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +254,7 @@ Transform:
   m_LocalScale: {x: -1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!114 &739862770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +275,10 @@ MonoBehaviour:
   AnchorPosition: {x: 0, y: 0}
   Tracker: {fileID: 167704, guid: 1d0d9dd50654f0649ae5a6c50f46ba1c, type: 2}
   _tracker: []
-  Avatar: {fileID: 11439980, guid: 251de473eae111149879937a56e5f884, type: 2}
+  AvatarPrefab: {fileID: 0}
   Player: 1
   KinectInput: 1
+  RandomAvatar: 0
 --- !u!1 &780499472
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,9 +315,10 @@ MonoBehaviour:
   AnchorPosition: {x: 0, y: 0}
   Tracker: {fileID: 167704, guid: 1d0d9dd50654f0649ae5a6c50f46ba1c, type: 2}
   _tracker: []
-  Avatar: {fileID: 11435942, guid: 83be41bcdad80374887e40e65108b20b, type: 2}
+  AvatarPrefab: {fileID: 11439980, guid: 791d4a1592df3554f9cba1bdc3274b31, type: 2}
   Player: 0
   KinectInput: 1
+  RandomAvatar: 0
 --- !u!4 &780499474
 Transform:
   m_ObjectHideFlags: 0
@@ -286,7 +330,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1128351390
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1216326661
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +429,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1815596760
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +514,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1815596766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,52 +527,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Background: {fileID: 536160440}
---- !u!1 &2047257622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2047257624}
-  - 114: {fileID: 2047257623}
-  m_Layer: 0
-  m_Name: _QwutschMeter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2047257623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2047257622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82853fe1727e2384980a87313f8f76ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentQwutschPoints: 0
-  CurrentQwutschEnergy: 0
-  QwutschStartBarLifeTime: 0
-  QwutschOverchargeLifeTime: 0
-  QwutschOverchargeLifeTimePercentage: .800000012
-  CurrentQwutschBarLifeTime: 0
-  QwutschBarEnergySubstractionRate: 0
-  QwutschBarOverchargeSubstractionRate: 0
-  IsOvercharge: 0
-  QwutschOverchargeBonusMultiplicator: 0
---- !u!4 &2047257624
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2047257622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3043524, y: -1.57771027, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
