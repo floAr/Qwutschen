@@ -25,8 +25,36 @@ public class Touchpoint : MonoBehaviour
     {
         _transform = this.GetComponent<Transform>();
         _qMeter = GameObject.FindObjectOfType<QwutschMeter>();
+        var sphere = GetComponentsInChildren<MeshRenderer>();
+        foreach (var item in sphere)
+        {
+            item.enabled = false;
+        }
     }
 
+    void Update()
+    {
+        if (Active)
+        {
+            Energy += Vector3.Magnitude(_transform.position - _oldPos);
+            Energy *= Decay;
+            _oldPos = _transform.position;
+        }
+        if (Charged != 0)
+        {
+            if (ChargeToPop <= 0)
+            {
+                Charged = 0;
+                if (Charged == -1)
+                {
+                    _qMeter.ChangeQwutschPoints(50);
+                    _qMeter.ChangeQwutschEnergy(10);
+                }
+            }
+            if (Charged == -1)
+                ChargeToPop -= Time.deltaTime;
+        }
+    }
 
 
     void OnTriggerEnter(Collider coll)
@@ -47,8 +75,6 @@ public class Touchpoint : MonoBehaviour
                     if (ChargeToPop > 0)
                         ChargeToPop -= Energy;
                 }
-
-                Debug.Log("Qwutsch-trigger");
             }
     }
 
