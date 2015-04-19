@@ -29,7 +29,9 @@ public class Qwutscher : MonoBehaviour
 
     public List<GameObject> _tracker;
 
-    public Avatar Avatar;
+    private Avatar _avatar;
+
+    public Avatar AvatarPrefab;
 
     public PlayerEnum Player;
 
@@ -39,6 +41,10 @@ public class Qwutscher : MonoBehaviour
 
     private Transform _transform;
     private Renderer _renderer;
+
+    private Vector2 _offset;
+
+    public bool RandomAvatar = true;
 
     // Use this for initialization
     void Start()
@@ -50,8 +56,29 @@ public class Qwutscher : MonoBehaviour
         _transform = this.GetComponent<Transform>();
         _renderer = this.GetComponent<Renderer>();
         _lastTracked = !IsTracked;
+        if (RandomAvatar || AvatarPrefab == null)
+        {
+            var avatarPrefab = GameObject.FindObjectOfType<RandomAvatarSelector>().GetRandomAvatar();
+            _avatar = (Avatar)GameObject.Instantiate(avatarPrefab, this.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            _avatar = (Avatar)GameObject.Instantiate(AvatarPrefab, this.transform.position, Quaternion.identity);
+        }
+        _avatar.transform.parent = this.transform;
 
-        foreach (var item in GetComponentsInChildren<Touchpoint>())   
+        if (Player == PlayerEnum.Player2)
+        {
+            _avatar.transform.localScale = new Vector3(_avatar.transform.localScale.x * -1, _avatar.transform.localScale.y, _avatar.transform.localScale.z);
+            _offset = Vector2.right * 2;
+            this.transform.Translate(0, 0, 0.8f);
+        }
+        else
+        {
+            _offset = Vector2.right * -2;
+        }
+
+        foreach (var item in GetComponentsInChildren<Touchpoint>())
         {
             item.Owner = Player;
         }
@@ -94,7 +121,7 @@ public class Qwutscher : MonoBehaviour
         }
 
 
-        Avatar.GetComponent<Transform>().position = AnchorPosition;
+        _avatar.GetComponent<Transform>().position = AnchorPosition;
 
         setTracker();
     }
