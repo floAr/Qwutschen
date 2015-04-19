@@ -10,7 +10,7 @@ public class Touchpoint : MonoBehaviour {
     public bool Active;
     public float Energy;
     private Vector3 _oldPos;
-    public float Decay;
+    public float Decay=0.98f;
     private Transform _transform;
 
 	// Use this for initialization
