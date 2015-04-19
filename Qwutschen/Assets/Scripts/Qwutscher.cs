@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿//#define TRACKER
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -49,10 +50,12 @@ public class Qwutscher : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+#if TRACKER
         for (int i = 0; i < 6; i++)
         {
             _tracker.Add(GameObject.Instantiate(Tracker));
         }
+#endif
         _transform = this.GetComponent<Transform>();
         _renderer = this.GetComponent<Renderer>();
         _lastTracked = !IsTracked;
@@ -122,8 +125,9 @@ public class Qwutscher : MonoBehaviour
 
 
         _avatar.GetComponent<Transform>().position = AnchorPosition;
-
+#if TRACKER
         setTracker();
+#endif
     }
 
     private void setTracker()
