@@ -112,6 +112,7 @@ public class Qwutscher : MonoBehaviour
                 RightFrontOffset = RightHandPosition.y - AnchorPosition.y;
                 LeftBackOffset = LeftElbowPosition.y - AnchorPosition.y;
                 RightBackOffset = RightElbowPosition.y - AnchorPosition.y;
+                _avatar.GetComponent<Transform>().position = AnchorPosition + _offset;
 
             }
         }
@@ -124,7 +125,7 @@ public class Qwutscher : MonoBehaviour
         }
 
 
-        _avatar.GetComponent<Transform>().position = AnchorPosition;
+        
 #if TRACKER
         setTracker();
 #endif
