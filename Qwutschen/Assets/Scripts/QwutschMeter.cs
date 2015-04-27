@@ -22,6 +22,8 @@ public class QwutschMeter : MonoBehaviour {
 
 	private ParticleSystem _qwutschBar;
 	public ParticleSystem Spark;
+
+    public bool Freeze;
 	// Use this for initialization
 	void Start () {
 		_qwutschBar = GetComponent<ParticleSystem>();
@@ -30,6 +32,8 @@ public class QwutschMeter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Freeze)
+            return;
 		yPosCollPlane = Mathf.Lerp (0f, QwutschBarCollYPosMax, CurrentQwutschEnergy / 100f);
 		CollisionPlane.localPosition = new Vector3 (CollisionPlane.localPosition.x, yPosCollPlane, CollisionPlane.localPosition.z);
 

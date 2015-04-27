@@ -11,11 +11,14 @@ public class SceneSwitcher : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         _players = GameObject.FindObjectsOfType<Qwutscher>();
+        GameObject.FindObjectOfType<QwutschMeter>().Freeze = true;
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        
         var gui = GameObject.FindObjectOfType<QwutschMeter>();
         if (gui != null)
         {
@@ -31,6 +34,7 @@ public class SceneSwitcher : MonoBehaviour
         if (_players[0].IsTracked && _players[1].IsTracked)
         {
             GameGui.SetActive(true);
+            GameObject.FindObjectOfType<QwutschMeter>().Freeze = false;
             MenuGui.SetActive(false);
         }
 
